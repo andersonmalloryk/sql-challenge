@@ -6,23 +6,16 @@ CREATE TABLE departments (
         dept_no
      )
 );
--- create table for department employee data
--- encountered error when uploading files because of duplicate data 
-CREATE TABLE dept_employee (
-    employee_no INT   NOT NULL,
-    dept_no VARCHAR   NOT NULL,
-	CONSTRAINT pk_dept_employee PRIMARY KEY (
-		employee_no
-	)
-);
--- create table for department manager data
-CREATE TABLE dept_manager (
-    dept_no INT   NOT NULL,
-    employee_no INT   NOT NULL,
-    CONSTRAINT pk_dept_manager PRIMARY KEY (
-        dept_no
+
+-- create table for title data
+CREATE TABLE titles (
+    title_id VARCHAR   NOT NULL,
+    title VARCHAR   NOT NULL,
+    CONSTRAINT pk_titles PRIMARY KEY (
+        title_id
      )
 );
+
 -- create table for employee data
 CREATE TABLE employees (
     employee_no INT   NOT NULL,
@@ -36,6 +29,7 @@ CREATE TABLE employees (
         employee_no
      )
 );
+
 -- create table for salary data
 CREATE TABLE salaries (
     employee_no INT   NOT NULL,
@@ -44,12 +38,23 @@ CREATE TABLE salaries (
 		employee_no	
 	)
 );
--- create table for title data
-CREATE TABLE titles (
-    title_id VARCHAR   NOT NULL,
-    title VARCHAR   NOT NULL,
-    CONSTRAINT pk_titles PRIMARY KEY (
-        title_id
+
+-- create table for department employee data
+-- Composite key used 
+CREATE TABLE dept_employee (
+    employee_no VARCHAR   NOT NULL,
+    dept_no VARCHAR   NOT NULL,
+	CONSTRAINT pk_dept_employee PRIMARY KEY (
+		employee_no, dept_no
+	)
+);
+
+-- create table for department manager data
+CREATE TABLE dept_manager (
+    dept_no VARCHAR   NOT NULL,
+    employee_no INT   NOT NULL,
+    CONSTRAINT pk_dept_manager PRIMARY KEY (
+        employee_no
      )
 );
 
@@ -67,6 +72,10 @@ REFERENCES titles (title_id);
 
 ALTER TABLE salaries ADD CONSTRAINT fk_salaries_employee_no FOREIGN KEY(employee_no)
 REFERENCES employees (employee_no);
+
+-- Import csvs in the following order: (1) departments.csv;
+-- (2) titles.csv; (3) employees.csv; (4) salaries.csv;
+-- (5) dept_emp.csv; (6) dept_manager.csv
 
 -- check the tables 
 SELECT * FROM departments;
