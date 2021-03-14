@@ -1,4 +1,4 @@
-﻿-- create table for departments data
+-- create table for departments data
 CREATE TABLE departments (
     dept_no VARCHAR   NOT NULL,
     dept_name VARCHAR   NOT NULL,
@@ -20,11 +20,11 @@ CREATE TABLE titles (
 CREATE TABLE employees (
     employee_no INT   NOT NULL,
     emp_title_id VARCHAR   NOT NULL,
-    birth_date VARCHAR   NOT NULL,
+    birth_date DATE   NOT NULL,
     first_name VARCHAR   NOT NULL,
     last_name VARCHAR   NOT NULL,
     sex VARCHAR   NOT NULL,
-    hire_date VARCHAR   NOT NULL,
+    hire_date DATE  NOT NULL,
     CONSTRAINT pk_employees PRIMARY KEY (
         employee_no
      )
@@ -42,7 +42,7 @@ CREATE TABLE salaries (
 -- create table for department employee data
 -- Composite key used 
 CREATE TABLE dept_employee (
-    employee_no VARCHAR   NOT NULL,
+    employee_no INT   NOT NULL,
     dept_no VARCHAR   NOT NULL,
 	CONSTRAINT pk_dept_employee PRIMARY KEY (
 		employee_no, dept_no
